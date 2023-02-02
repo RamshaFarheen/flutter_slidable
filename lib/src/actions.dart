@@ -130,19 +130,20 @@ class SlidableAction extends StatelessWidget {
   /// You must set either an [icon] or a [label].
   ///
   /// The [flex] argument must also be greater than 0.
-  const SlidableAction({
-    Key? key,
-    this.flex = _kFlex,
-    this.backgroundColor = _kBackgroundColor,
-    this.foregroundColor,
-    this.autoClose = _kAutoClose,
-    required this.onPressed,
-    this.icon,
-    this.spacing = 4,
-    this.label,
-    this.borderRadius = BorderRadius.zero,
-    this.padding,
-  })  : assert(flex > 0),
+  const SlidableAction(
+      {Key? key,
+      this.flex = _kFlex,
+      this.backgroundColor = _kBackgroundColor,
+      this.foregroundColor,
+      this.autoClose = _kAutoClose,
+      required this.onPressed,
+      this.icon,
+      this.spacing = 4,
+      this.label,
+      this.borderRadius = BorderRadius.zero,
+      this.padding,
+      this.iconWidget})
+      : assert(flex > 0),
         assert(icon != null || label != null),
         super(key: key);
 
@@ -178,6 +179,9 @@ class SlidableAction extends StatelessWidget {
   /// Padding of the OutlinedButton
   final EdgeInsets? padding;
 
+  ///Widget to add above [label]
+  final Widget? iconWidget;
+
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[];
@@ -185,6 +189,12 @@ class SlidableAction extends StatelessWidget {
     if (icon != null) {
       children.add(
         Icon(icon),
+      );
+    }
+
+    if (iconWidget != null) {
+      children.add(
+        iconWidget!,
       );
     }
 
